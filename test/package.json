@@ -1,0 +1,30 @@
+{
+  "name": "cypress",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "pretest": "rimraf -r ./reports/* && rimraf -r ./screenshots/*",
+    "test": "npm run cypress-test || npm run posttest",
+    "local": "npm run cypress-local || npm run posttest",
+    "cypress-test": "cypress run --browser=chrome --spec ./cypress/e2e/all.cy.js",
+    "posttest": "npm run mergeReport && npm run generate-HTMLReport && rimraf report1.json",
+    "mergeReport": "mochawesome-merge ./reports/*.json > ./report1.json",
+    "generate-HTMLReport": "marge report1.json --reportDir ./reports",
+    "open-report": "open ./report/report1.html"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cypress": "^10.8.0",
+    "mochawesome-report-generator": "^6.2.0"
+  },
+  "devDependencies": {
+    "cypress-file-upload": "^5.0.8",
+    "cypress-v10-preserve-cookie": "^1.1.1",
+    "mochawesome": "^7.1.3",
+    "mochawesome-merge": "^4.2.1",
+    "cypress-iframe": "^1.0.1"
+  }
+}
